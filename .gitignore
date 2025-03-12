@@ -1,0 +1,12 @@
+#Nodemodule
+node_modules
+#Build
+build
+#Dist
+dist
+#Coverage
+coverage
+#Logs
+logs
+#.env
+.env
