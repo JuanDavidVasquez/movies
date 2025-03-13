@@ -7,7 +7,7 @@ Este es un servicio RESTful para la gestión de usuarios, películas y categorí
 - Gestión de películas y categorías.
 - Filtrado de películas por categoría.
 - Registro de películas vistas por usuarios.
-- API documentada con Postman/Insomnia.
+- API documentada con Postman.
 - Desplegable en Heroku.
 
 ## 📂 Modelo Relacional
@@ -25,7 +25,6 @@ La base de datos se estructura de la siguiente manera:
 - **Movies** (Películas)
   - `id` (UUID, Primary Key)
   - `title` (STRING, No nulo)
-  - `description` (STRING)
   - `release_date` (DATE, No nulo)
   - `category_id` (UUID, Foreign Key → Categories.id)
   - `created_at` (TIMESTAMP)
@@ -34,7 +33,6 @@ La base de datos se estructura de la siguiente manera:
 - **Categories** (Categorías)
   - `id` (UUID, Primary Key)
   - `name` (STRING, Único, No nulo)
-  - `description` (STRING)
   - `created_at` (TIMESTAMP)
   - `updated_at` (TIMESTAMP)
 
@@ -44,38 +42,8 @@ La base de datos se estructura de la siguiente manera:
   - `movie_id` (UUID, Foreign Key → Movies.id)
   - `watched_at` (TIMESTAMP, Default: NOW)
 
----
 
-## 🚀 Instalación y Configuración
-
-### 1️⃣ Clonar el repositorio
-```bash
-  git clone https://github.com/tuusuario/movie-api.git
-  cd movie-api
-```
-
-### 2️⃣ Instalar dependencias
-```bash
-  npm install
-```
-
-### 3️⃣ Configurar variables de entorno
-Crea un archivo `.env` y define las variables:
-```env
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=yourpassword
-DB_NAME=movie_db
-PORT=3000
-```
-
-### 4️⃣ Ejecutar migraciones y seeders
-```bash
-  npx sequelize db:migrate
-  npx sequelize db:seed:all
-```
-
-### 5️⃣ Iniciar el servidor
+### Iniciar el servidor
 ```bash
   npm run dev
 ```
