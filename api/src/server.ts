@@ -4,6 +4,9 @@ import morgan from 'morgan'
 import { db } from './config/db'
 import movie from './routes/movieRouter'
 import category from './routes/categoryRouter'
+import user from './routes/userRouter'
+import auth from './routes/authRoute'
+import { seedCategories } from "./seeders/seedCategories";
 
 async function connectDB() {
   try {
@@ -23,8 +26,14 @@ app.use(morgan('dev'))
 
 app.use(express.json())
 
+
+seedCategories();
+
 app.use('/api/movies', movie)
 app.use('/api/categories', category)
+app.use('/api/users', user)
+app.use('/api/auth', auth)
+
 
 
 

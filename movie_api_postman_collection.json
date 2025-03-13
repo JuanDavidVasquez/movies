@@ -1,0 +1,124 @@
+{
+    "info": {
+        "name": "Movie API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Get all users",
+                    "request": {
+                        "method": "GET",
+                        "url": "{{base_url}}/users"
+                    }
+                },
+                {
+                    "name": "Create user",
+                    "request": {
+                        "method": "POST",
+                        "url": "{{base_url}}/users",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"securepassword\"\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Movies",
+            "item": [
+                {
+                    "name": "Get all movies",
+                    "request": {
+                        "method": "GET",
+                        "url": "{{base_url}}/movies"
+                    }
+                },
+                {
+                    "name": "Get movies by category",
+                    "request": {
+                        "method": "GET",
+                        "url": "{{base_url}}/movies?category=drama"
+                    }
+                },
+                {
+                    "name": "Create movie",
+                    "request": {
+                        "method": "POST",
+                        "url": "{{base_url}}/movies",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Inception\",\n    \"description\": \"A mind-bending thriller\",\n    \"release_date\": \"2010-07-16\",\n    \"category_id\": \"some-category-id\"\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "User Movies",
+            "item": [
+                {
+                    "name": "Mark movie as watched",
+                    "request": {
+                        "method": "POST",
+                        "url": "{{base_url}}/mark-watched",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"user_id\": \"some-user-id\",\n    \"movie_id\": \"some-movie-id\"\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Categories",
+            "item": [
+                {
+                    "name": "Get all categories",
+                    "request": {
+                        "method": "GET",
+                        "url": "{{base_url}}/categories"
+                    }
+                },
+                {
+                    "name": "Create category",
+                    "request": {
+                        "method": "POST",
+                        "url": "{{base_url}}/categories",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Action\",\n    \"description\": \"Action-packed movies\"\n}"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

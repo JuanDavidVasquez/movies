@@ -1,5 +1,7 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from "sequelize-typescript";
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo, BelongsToMany } from "sequelize-typescript";
 import { Category } from "./Category";
+import { User } from "./User";
+import { UserMovie } from "./UserMovie";
 
 @Table({
   tableName: "movies",
@@ -34,6 +36,10 @@ export class Movie extends Model<Movie> {
 
   @BelongsTo(() => Category)
   category: Category;
+
+  @BelongsToMany(() => User, () => UserMovie)
+  declare usersWhoWatched: User[];
+
 }
 
 export default Movie;

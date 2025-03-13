@@ -1,4 +1,5 @@
-import { Table, Column, Model, DataType, HasMany, BelongsToMany } from "sequelize-typescript";
+import { Table, Column, Model, DataType, BelongsToMany, BeforeCreate, BeforeUpdate } from "sequelize-typescript";
+import bcrypt from "bcryptjs";
 import { Movie } from "./Movie";
 import { UserMovie } from "./UserMovie";
 
@@ -18,23 +19,41 @@ export class User extends Model<User> {
     type: DataType.STRING,
     allowNull: false,
   })
-  name: string;
+  declare name: string;  // Usamos `declare` para evitar shadowing
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
     unique: true,
   })
-  email: string;
+  declare email: string;  // Usamos `declare` para evitar shadowing
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  password: string;
+  declare password: string;  // Usamos `declare` para evitar shadowing
 
   @BelongsToMany(() => Movie, () => UserMovie)
-  watchedMovies: Movie[];
+  declare watchedMovies: Movie[];
+
+  // 🔒 Hashear la contraseña antes de crear o actualizar
+  @BeforeCreate
+  @BeforeUpdate
+  static async hashPassword(user: User) {
+    if (user.password) {
+      user.password = await bcrypt.hash(user.password, 10);
+    }
+  }
+
+  // Ocultar contraseña y timestamps en las respuestas JSON
+  toJSON() {
+    const values = super.toJSON();
+    delete values.password;
+    delete values.createdAt;
+    delete values.updatedAt;
+    return values;
+  }
 }
 
 export default User;
