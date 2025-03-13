@@ -31,8 +31,8 @@ export class AuthController {
       // Generar token JWT
       const token = jwt.sign(
         { id: user.id, email: user.email },
-        process.env.JWT_SECRET as string,  // Asegurar que no es undefined
-        { expiresIn: "1h" }
+        process.env.JWT_SECRET as string, 
+        { expiresIn: "1m" }
       );
 
       res.status(200).json({

@@ -1,21 +1,24 @@
-import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
 
-dotenv.config();
+interface AuthRequest extends Request {
+  user?: any; // Puedes definir mejor el tipo de usuario según tu modelo
+}
 
-export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.header('Authorization')?.split(' ')[1];
+export const authenticateToken = (req: AuthRequest, res: Response, next: NextFunction): void => {
+  const token = req.header("Authorization")?.split(" ")[1];
 
   if (!token) {
-    return res.status(401).json({ message: 'Access denied', status: 'error' });
+    res.status(401).json({ message: "Access denied. No token provided.", status: "error" });
+    return;
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
-    (req as any).user = decoded;
-    next();
+    const secret = process.env.JWT_SECRET as string;
+    const decoded = jwt.verify(token, secret);
+    req.user = decoded; // Agrega el usuario decodificado al request
+    next(); // Llama a `next` sin devolver una respuesta
   } catch (error) {
-    return res.status(401).json({ message: 'Invalid token', status: 'error' });
+    res.status(403).json({ message: "Invalid token.", status: "error" });
   }
 };
