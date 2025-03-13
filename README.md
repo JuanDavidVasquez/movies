@@ -8,7 +8,7 @@ Este es un servicio RESTful para la gestión de usuarios, películas y categorí
 - Filtrado de películas por categoría.
 - Registro de películas vistas por usuarios.
 - API documentada con Postman.
-- Desplegable en Heroku.
+- Desplegable en Render.
 
 ## 📂 Modelo Relacional
 
@@ -42,14 +42,6 @@ La base de datos se estructura de la siguiente manera:
   - `movie_id` (UUID, Foreign Key → Movies.id)
   - `watched_at` (TIMESTAMP, Default: NOW)
 
-
-### Iniciar el servidor
-```bash
-  npm run dev
-```
-El servidor correrá en `http://localhost:4000`
-
----
 
 ## 🛠️ Endpoints
 
